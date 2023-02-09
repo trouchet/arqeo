@@ -23,8 +23,8 @@ The catalog-concepts are:
 
 1. __catalog{ArtifactItems|ArtifactsInCollection}__: applies `isArtifactCallback` on potential artifact-elements to validate each item individually.  
 
-The interested reader may access use-cases described above on test files available on URLs below: 
+The interested reader may access use-cases described above on test files available on code folders below: 
 
-1. __Artifacts__: https://github.com/trouchet/arqeo/blob/main/src/__test__/artifacts.test.js
-2. __Checkers and transformers__: https://github.com/trouchet/arqeo/blob/main/src/__test__/curators.test.js
+1. __Artifacts__: src/__test__/artifacts.test.js
+2. __Checkers and transformers__: src/__test__/curators.test.js
 
