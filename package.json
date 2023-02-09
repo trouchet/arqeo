@@ -1,0 +1,23 @@
+{
+  "name": "arqheo",
+  "version": "0.0.1",
+  "description": "A npm package to organize and validate artifacts",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trouchet/arqeo.git"
+  },
+  "keywords": [
+    "array",
+    "condition"
+  ],
+  "author": "brunolnetto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/trouchet/arqeo/issues"
+  },
+  "homepage": "https://github.com/trouchet/arqeo#readme"
+}
