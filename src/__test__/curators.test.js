@@ -1,8 +1,7 @@
 import { isString } from "lodash";
 import { 
   catalogArtifactItems, 
-  catalogArtifactsInCollection, 
-  hasArtifactItemInCollection 
+  catalogArtifactsInCollection
 } from "../curators";
 
 let result, expectation, candidate;
@@ -38,66 +37,6 @@ describe(
       expectation = [ true ];
     
       expect(result).toStrictEqual(expectation);
-    });
-
-    it("must check for existence of valid items", () => {
-      const hasArtifactItem_ = (el) => hasArtifactItemInCollection(el, isString);
-
-      candidate = 42;
-
-      result = hasArtifactItem_(candidate);
-      expectation = false;
-    
-      expect(result).toBe(expectation);
-    
-      candidate = "42";
-
-      result = hasArtifactItem_(candidate);
-      expectation = true;
-    
-      expect(result).toBe(expectation);
-    
-      candidate = ["7", "42"];
-
-      result = hasArtifactItem_(candidate);
-      expectation = true;
-    
-      expect(result).toBe(expectation);
-    
-      candidate = ["42", 42];
-
-      result = hasArtifactItem_(candidate);
-      expectation = true;
-    
-      expect(result).toBe(expectation);
-    
-      candidate = [42, 42];
-
-      result = hasArtifactItem_(candidate);
-      expectation = false;
-    
-      expect(result).toBe(expectation);
-    
-      candidate = [42, [42, 42]];
-
-      result = hasArtifactItem_(candidate);
-      expectation = false;
-    
-      expect(result).toBe(expectation);
-    
-      candidate = ["42", [42, 42]];
-
-      result = hasArtifactItem_(candidate);
-      expectation = true;
-    
-      expect(result).toBe(expectation);
-    
-      candidate = [42, ["42", 42]];
-    
-      result = hasArtifactItem_(candidate);
-      expectation = true;
-    
-      expect(result).toBe(expectation);
     });
 
     it(

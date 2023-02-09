@@ -1,200 +1,220 @@
-import { isNumber } from "lodash";
-import { are, areFalse, areTrue, batchAnd, fulfill, hasTrue, isCondition, isExtensionOf, isFalse, isTrue } from "../checkers";
+import { isString } from "lodash";
+
+import { 
+  isArtifactItem, 
+  isArtifactArray,
+  hasArtifactItem,
+  hasArtifacts,
+  isArtifactCollection,
+  hasArtifactItemInCollection
+} from "../checkers";
 
 let result, expectation, candidate;
 
-describe("isCondition", () => {
-  it("must throw TypeError on false condition", () => {
-    const condition = 42 === "42"; // false
-    const conditionCallback = (arg) => {};
-    const candidate = {};
-    const error_msg = "Wrong!";
-    const errorClass = TypeError;
+describe("artifacts", () => {
+  it(
+    "must assert artifact item", 
+    () => {
+      candidate = ["1", "2", "3", "4"];
+      
+      result = isArtifactItem(candidate, isString)
 
-    const isConditionFn = () =>
-      isCondition(condition, conditionCallback, candidate, error_msg, errorClass);
+      expectation = false;
 
-    expect(isConditionFn).toThrow(TypeError);
-  });
+      expect(result).toBe(expectation);
 
-  it("must throw Error on missing errorClass", () => {
-    const condition = 42 === "42"; // false
-    const conditionCallback = (arg) => arg;
-    const candidate = 7;
-    const error_msg = "Wrong!";
+      result = isArtifactItem("1", isString)
+      expectation = true;
 
-    const isConditionFn = () =>
-      isCondition(condition, conditionCallback, candidate, error_msg);
+      expect(result).toBe(expectation);
+    }
+  );
 
-    expect(isConditionFn).toThrow(Error);
-  });
+  it(
+    "must assert artifact array", 
+    () => {
+      candidate = ["1", "2", "3", "4"];
+      
+      result = isArtifactArray(candidate, isString)
+      expectation = true;
 
-  it("must return on true condition", () => {
-    const condition = 42 === 42; // true
-    const conditionCallback = (arg) => arg;
-    const candidate = 7;
-    const error_msg = "Wrong!";
-    const errorClass = Error;
+      expect(result).toBe(expectation);
 
-    result = isCondition(
-      condition,
-      conditionCallback,
-      candidate,
-      error_msg,
-      errorClass
-    );
-    expectation = candidate;
-    
-    expect(result).toBe(expectation);
-  });
-  it("must return argument on true condition", () => {
-    const condition = 42 === 42; // true
-    const candidate = 7;
-    const errorMsg = "It does not fulfill!";
-    const errorClass = Error;
+      result = isArtifactArray("1", isString)
+      expectation = false;
 
-    result = fulfill(candidate, condition, errorMsg, errorClass);
-    expectation = candidate;
+      expect(result).toBe(expectation);
+    }
+  );
 
-    expect(result).toBe(expectation);
-  });
-  it("must return ", () => {
-    candidate = [1, 2, 3, 4];
-    
-    result = are(candidate, isNumber);
-    expectation = true;
+  it(
+    "must assert artifact collections", 
+    () => {
+      const collectionCallback = (candidate) => isArtifactCollection(candidate, isString);
+      
+      candidate = "42";
+      
+      result = collectionCallback(candidate)
+      expectation = true;
 
-    expect(result).toBe(expectation);
-  });
-  it("must throw Error on false condition", () => {
-    const condition = 42 !== 42; // false
-    const candidate = 7;
-    const errorMsg = "It does not fulfill!";
-    const errorClass = TypeError;
+      expect(result).toBe(expectation);
 
-    const fulfillWithErrorClassFn = () =>
-      fulfill(candidate, condition, errorMsg, errorClass);
-    const fulfillWithoutErrorClassFn = () => fulfill(candidate, condition, errorMsg);
+      candidate = ["1", "2"];
+      
+      result = collectionCallback(candidate)
+      expectation = true;
 
-    expect(fulfillWithErrorClassFn).toThrow(TypeError);
-    expect(fulfillWithoutErrorClassFn).toThrow(Error);
-  });
-});
+      expect(result).toBe(expectation);
 
-describe("boolean maps", () => {
-  it("must assert batchAnd", () => {
-    result = () => batchAnd(['42', '7']);
-    expectation = TypeError;
-    
-    expect(result).toThrow(expectation);
-    
-    result = () => batchAnd(false);
-    expectation = TypeError;
-    
-    expect(result).toThrow(expectation);
+      candidate = ["42", ["1", "2"]];
+      
+      result = collectionCallback(candidate)
+      expectation = true;
 
-    result = () => batchAnd(true);
-    expectation = TypeError;
-    
-    expect(result).toThrow(expectation);
-    
-    result = batchAnd([true, false]);
+      expect(result).toBe(expectation);
+
+      candidate = 42;
+      
+      result = collectionCallback(candidate)
+      expectation = false;
+
+      expect(result).toBe(expectation);
+
+      candidate = ["1", 2];
+      
+      result = collectionCallback(candidate)
+      expectation = false;
+
+      expect(result).toBe(expectation);
+
+      candidate = [42, ["1", "2"]];
+      
+      result = collectionCallback(candidate)
+      expectation = false;
+
+      expect(result).toBe(expectation);
+    }
+  );
+
+  it(
+    "must check for existence of valid items", 
+    () => {
+      let candidate = [1, 2, 3, "4"];
+      
+      result = hasArtifactItem(candidate, isString);
+      expectation = true;
+
+      expect(result).toBe(expectation);
+      
+      candidate = [1, 2, 3, 4];
+      
+      result = hasArtifactItem(candidate, isString);
+      expectation = false;
+
+      expect(result).toBe(expectation);
+    }
+  );
+
+  it("must check for existence of valid items", () => {
+    const hasArtifactItem_ = (el) => hasArtifactItemInCollection(el, isString);
+
+    candidate = 42;
+
+    result = hasArtifactItem_(candidate);
     expectation = false;
-    
+  
     expect(result).toBe(expectation);
+  
+    candidate = "42";
 
-    result = batchAnd([true, true]);
+    result = hasArtifactItem_(candidate);
     expectation = true;
-    
+  
     expect(result).toBe(expectation);
-  });
-  it("must assert true-element on array", () => {
-    result = hasTrue(true);
-    expectation = true;
-    
-    expect(result).toBe(expectation);
+  
+    candidate = ["7", "42"];
 
-    result = hasTrue(false);
+    result = hasArtifactItem_(candidate);
+    expectation = true;
+  
+    expect(result).toBe(expectation);
+  
+    candidate = ["42", 42];
+
+    result = hasArtifactItem_(candidate);
+    expectation = true;
+  
+    expect(result).toBe(expectation);
+  
+    candidate = [42, 42];
+
+    result = hasArtifactItem_(candidate);
     expectation = false;
-    
+  
     expect(result).toBe(expectation);
+  
+    candidate = [42, [42, 42]];
 
-    result = hasTrue([true, false]);
-    expectation = true;
-    
-    expect(result).toBe(expectation);
-
-    result = hasTrue([false, false]);
+    result = hasArtifactItem_(candidate);
     expectation = false;
-    
+  
     expect(result).toBe(expectation);
-  });
-  it("must assert true-element", () => {
-    result = isTrue(false);
-    expectation = false;
-    
-    expect(result).toBe(expectation);
+  
+    candidate = ["42", [42, 42]];
 
-    result = isTrue(true);
+    result = hasArtifactItem_(candidate);
     expectation = true;
-    
+  
     expect(result).toBe(expectation);
-  });
-  it("must assert true-element", () => {
-    result = isFalse(false);
+  
+    candidate = [42, ["42", 42]];
+  
+    result = hasArtifactItem_(candidate);
     expectation = true;
-    
-    expect(result).toBe(expectation);
-
-    result = isFalse(true);
-    expectation = false;
-    
+  
     expect(result).toBe(expectation);
   });
-  it("must assert true-element on array", () => {
-    result = () => areTrue(false);
-    expectation = TypeError;
-    
-    expect(result).toThrow(expectation);
 
-    result = () => areTrue(true);
-    expectation = TypeError;
-    
-    expect(result).toThrow(expectation);
-    
-    result = areTrue([true, true]);
-    expectation = true;
-    
-    expect(result).toBe(expectation);
+  it(
+    "must check for existence of valid items", 
+    () => {
+      candidate = [1, 2, 3, "4"];
+      
+      result = hasArtifacts(candidate, isString);
+      expectation = true;
 
-    result = areTrue([false, true]);
-    expectation = false;
-    
-    expect(result).toBe(expectation);
-  });
-  it("must assert false-element on array", () => {
-    result = () => areFalse(false);
-    expectation = TypeError;
-    
-    expect(result).toThrow(expectation);
-    
-    result = areFalse([false, false]);
-    expectation = true;
-    
-    expect(result).toBe(expectation);
+      expect(result).toBe(expectation);
+      
+      candidate = [1, 2, 3, 4];
+      
+      result = hasArtifacts(candidate, isString);
+      let args = [1, 2, 3, "4"];
 
-    result = areFalse([false, true]);
-    expectation = false;
-    
-    expect(result).toBe(expectation);
-  });
-});
+      result = hasArtifacts(args, isString);
+      expectation = true;
 
-describe("isExtensionOf", () => {
-  it("must assert TypeError as Error extension", () => {
-    result = isExtensionOf(TypeError, Error);
-    expectation = true;
+      expect(result).toBe(expectation);
 
-    expect(result).toBe(expectation);
-  });
+      args = [1, 2, 3, 4];
+
+      result = hasArtifacts(args, isString);
+      expectation = false;
+
+      expect(result).toBe(expectation);
+
+      candidate = "4";
+      
+      result = hasArtifacts(candidate, isString);
+      expectation = true;
+
+      expect(result).toBe(expectation);
+      
+      candidate = 1;
+      
+      result = hasArtifacts(candidate, isString);
+      expectation = false;
+
+      expect(result).toBe(expectation);
+    }
+  );
 });

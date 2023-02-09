@@ -1,4 +1,4 @@
-import { isExtensionOf } from "../checkers";
+import { isExtensionOf } from "../utils";
 import { artifactError, artifactErrorMessage, buildError } from "../errors";
 
 let result, expectation;
