@@ -25,6 +25,7 @@ The catalog-concepts are:
 
 The interested reader may access use-cases described above on test files available on code folders below: 
 
-1. __Artifacts__: src/__test__/artifacts.test.js
-2. __Checkers and transformers__: src/__test__/curators.test.js
+1. __Artifacts__: src/\_\_test\_\_/artifacts.test.js
+2. __Checkers__: src/\_\_test\_\_/checkers.test.js
+3. __Curators__: src/\_\_test\_\_/curators.test.js
 
