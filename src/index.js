@@ -1,23 +1,18 @@
 import { 
-    isArtifact, 
-    hasArtifacts,
+    isArtifact_, 
     isArtifactCollection,
     hasArtifactItemInCollection 
 } from "./checkers";
 
 import { 
-    catalogArtifactItems, 
     catalogArtifactsInCollection 
 } from "./curators";
 
 import { applyArtifact } from "./artifacts";
 
-export let isArtifact = isArtifact;
-export let hasArtifacts = hasArtifacts;
-export let isArtifactCollection = isArtifactCollection;
-export let hasArtifactItemInCollection = hasArtifactItemInCollection;
+export let is = isArtifact_;
+export let has = hasArtifactItemInCollection;
+export let isCollection = isArtifactCollection;
+export let apply = applyArtifact;
+export let catalog = catalogArtifactsInCollection;
 
-export let catalogArtifactItems = catalogArtifactItems;
-export let catalogArtifactsInCollection = catalogArtifactsInCollection;
-
-export let applyArtifact = applyArtifact;

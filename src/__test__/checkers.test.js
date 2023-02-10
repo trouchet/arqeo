@@ -4,7 +4,7 @@ import {
   isArtifactItem, 
   isArtifactArray,
   hasArtifactItem,
-  hasArtifacts,
+  hasArtifacts_,
   isArtifactCollection,
   hasArtifactItemInCollection
 } from "../checkers";
@@ -180,38 +180,38 @@ describe("artifacts", () => {
     () => {
       candidate = [1, 2, 3, "4"];
       
-      result = hasArtifacts(candidate, isString);
+      result = hasArtifacts_(candidate, isString);
       expectation = true;
 
       expect(result).toBe(expectation);
       
       candidate = [1, 2, 3, 4];
       
-      result = hasArtifacts(candidate, isString);
+      result = hasArtifacts_(candidate, isString);
       let args = [1, 2, 3, "4"];
 
-      result = hasArtifacts(args, isString);
+      result = hasArtifacts_(args, isString);
       expectation = true;
 
       expect(result).toBe(expectation);
 
       args = [1, 2, 3, 4];
 
-      result = hasArtifacts(args, isString);
+      result = hasArtifacts_(args, isString);
       expectation = false;
 
       expect(result).toBe(expectation);
 
       candidate = "4";
       
-      result = hasArtifacts(candidate, isString);
+      result = hasArtifacts_(candidate, isString);
       expectation = true;
 
       expect(result).toBe(expectation);
       
       candidate = 1;
       
-      result = hasArtifacts(candidate, isString);
+      result = hasArtifacts_(candidate, isString);
       expectation = false;
 
       expect(result).toBe(expectation);
