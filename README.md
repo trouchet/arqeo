@@ -1,4 +1,4 @@
-![investigate yourself](https://raw.githubusercontent.com/trouchet/arqeo/main/images/arqheo_tiny.png)
+![investigate yourself](https://raw.githubusercontent.com/trouchet/arqeo/main/images/arqeo_small.png)
 # Arqeo
 [![Version](https://img.shields.io/npm/v/arqeo.svg)](https://www.npmjs.com/package/arqeo)
 [![codecov](https://codecov.io/gh/trouchet/arqeo/branch/main/graph/badge.svg?token=55H8MVEJQJ)](https://codecov.io/gh/trouchet/arqeo)
