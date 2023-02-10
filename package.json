@@ -3,7 +3,9 @@
   "version": "0.0.3",
   "type": "module",
   "description": "A npm package to organize and validate artifacts",
-  "main": "dist/index.js",
+  "main": "dist/index-require.js",
+  "module": "src/index.js",
+  "modules.root": "src",
   "scripts": {
     "test": "jest",
     "build": "webpack --mode production",
@@ -37,13 +39,13 @@
     "jest-environment-jsdom": "^29.4.2",
     "ts-jest": "^29.0.5",
     "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1"
-  },
-  "dependencies": {
+    "webpack-cli": "^5.0.1",
     "husky": "^8.0.3",
     "jest": "^29.4.2",
-    "lodash": "^4.17.21",
     "np": "^3.0.4",
     "prettier": "^2.8.4"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
