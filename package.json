@@ -6,13 +6,14 @@
   "scripts": {
     "test": "jest",
     "build": "webpack --mode production",
+    "prepublish": "npm run build",
     "prepare": "husky install",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test:cache": "jest --clearCache",
     "test:run": "npm run test:cache && jest",
     "test:watch": "npm run test:cache && jest --watchAll --collect-coverage --coverage",
-    "release": "np --any-branch"
+    "release": "npm run prepublish && np --any-branch"
   },
   "repository": {
     "type": "git",
