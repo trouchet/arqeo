@@ -1,4 +1,4 @@
-import { fulfill } from "./utils";
+import { fulfill } from "./utils.js";
 import { artifactError } from "./errors.js";
 import { isArtifact, isArtifactArray } from "./checkers.js";
 
