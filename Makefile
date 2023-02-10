@@ -38,10 +38,13 @@ COVERAGE_IGNORE_PATHS = "eule/examples"
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-clean: clean-test ## remove all test coverage
-
 clean-test: ## remove test and coverage artifacts
 	rm -fr coverage/
+
+clean-dist: ## remove dist artifacts
+	rm -fr dist/
+
+clean: clean-test clean-dist ## remove all test coverage
 
 test: ## run tests with jest
 	npm run test:run
