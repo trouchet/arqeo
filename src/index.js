@@ -2,11 +2,11 @@ import {
   isArtifact,
   isArtifactCollection,
   hasArtifactItemInCollection,
-} from "./checkers";
+} from "./checkers.js";
 
-import { catalogCollection } from "./curators";
+import { catalogCollection } from "./curators.js";
 
-import { applyArtifact } from "./artifacts";
+import { applyArtifact } from "./artifacts.js";
 
 export let is = isArtifact;
 export let are = isArtifactCollection;

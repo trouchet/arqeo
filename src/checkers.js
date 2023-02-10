@@ -1,6 +1,6 @@
 import { isArray } from "lodash";
-import { are, hasTrue } from "./utils";
-import { catalogArtifact } from "./curators";
+import { are, hasTrue } from "./utils.js";
+import { catalogArtifact } from "./curators.js";
 
 export const isArtifactArray = (candidate, isArtifactCallback) =>
   isArray(candidate) ? are(candidate, isArtifactCallback) : false;

@@ -1,5 +1,5 @@
 import { isString } from "lodash";
-import { fulfill, isExtensionOf } from "./utils";
+import { fulfill, isExtensionOf } from "./utils.js";
 
 export const buildError = (errorClass, errorMessage) => {
   return {

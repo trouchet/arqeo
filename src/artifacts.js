@@ -1,6 +1,6 @@
 import { fulfill } from "./utils";
-import { artifactError } from "./errors";
-import { isArtifact, isArtifactArray } from "./checkers";
+import { artifactError } from "./errors.js";
+import { isArtifact, isArtifactArray } from "./checkers.js";
 
 export const applyArtifact = (candidate, isArtifactCallback, applyCallback) => {
   const artifactApplyCallback = (candidate) =>

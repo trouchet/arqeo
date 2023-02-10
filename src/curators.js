@@ -1,6 +1,6 @@
 import { isArray } from "lodash";
-import { hasArtifacts, isArtifact, isArtifactItem } from "./checkers";
-import { areFalse } from "./utils";
+import { hasArtifacts, isArtifact, isArtifactItem } from "./checkers.js";
+import { areFalse } from "./utils.js";
 
 export const catalogArtifact = (candidate, isArtifactCallback) => {
   const catalogArtifactItem = (candidate) =>
