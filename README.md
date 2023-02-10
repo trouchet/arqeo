@@ -1,5 +1,6 @@
 ![investigate yourself](https://raw.githubusercontent.com/trouchet/arqeo/main/images/arqheo_tiny.png)
 # Arqeo
+[![codecov](https://codecov.io/gh/trouchet/arqeo/branch/main/graph/badge.svg?token=55H8MVEJQJ)](https://codecov.io/gh/trouchet/arqeo)
 
 ## Concepts
 
