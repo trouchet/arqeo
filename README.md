@@ -1,6 +1,8 @@
 ![investigate yourself](https://raw.githubusercontent.com/trouchet/arqeo/main/images/arqheo_tiny.png)
 # Arqeo
 
+## Concepts
+
 This npm module aims to give a development tools for items condition-check. The behavior emulates, for example, Typescript type-check. 
 
 The object-concepts are:
@@ -15,13 +17,19 @@ The callback-concepts are:
 
 The checker-concepts are:
 
-1. __isArtifact{Item|Array|Collection}__: validates a artifact-`candidate` with `isArtifactCallback`-function; 
-2. __hasArtifactItem__: verifies if artifact array-candidate has valid items;
-3. __hasArtifacts__: verifies if artifact-candidate has valid items;
+1. __is__: validates `candidate` with `isArtifactCallback`-function to verify it is an artifact; 
+2. __are__: verifies if `candidate` with `isArtifactCallback`-function to verify it is a collection;
+3. __has__: verifies if `candidate` has valid artifact items;
 
 The catalog-concepts are:
 
-1. __catalog{ArtifactItems|ArtifactsInCollection}__: applies `isArtifactCallback` on potential artifact-elements to validate each item individually.  
+1. __catalog__: applies `isArtifactCallback` on potential {artifact, collection}-elements to validate each item individually.  
+
+The transform-concepts are:
+
+1. __apply__: applies `applyCallback`-function on artifact-candidate with validation of `isArtifactCallback`-function.
+
+## Use cases
 
 The interested reader may access use-cases described above on test files available on code folders below: 
 
