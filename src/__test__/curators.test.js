@@ -1,7 +1,7 @@
 import { isString } from "lodash";
 import { 
-  catalogArtifactItems, 
-  catalogArtifactsInCollection
+  catalogArtifact, 
+  catalogCollection
 } from "../curators";
 
 let result, expectation, candidate;
@@ -12,28 +12,28 @@ describe(
     it("must check for existence of valid items", () => {
       candidate = [1, 2, 3, "4"];
 
-      result = catalogArtifactItems(candidate, isString)
+      result = catalogArtifact(candidate, isString)
       expectation = [false, false, false, true];
     
       expect(result).toStrictEqual(expectation);
 
       candidate = [1, 2, 3, 4];
 
-      result = catalogArtifactItems(candidate, isString)
+      result = catalogArtifact(candidate, isString)
       expectation = false;
     
       expect(result).toStrictEqual(expectation);
     
       candidate = 42;
 
-      result = catalogArtifactItems(candidate, isString)
+      result = catalogArtifact(candidate, isString)
       expectation = false;
     
       expect(result).toStrictEqual(expectation);
     
       candidate = "42";
 
-      result = catalogArtifactItems(candidate, isString)
+      result = catalogArtifact(candidate, isString)
       expectation = [ true ];
     
       expect(result).toStrictEqual(expectation);
@@ -42,7 +42,7 @@ describe(
     it(
       "must check for existence of valid items", 
       () => {
-        const catalogCallback = (el) => catalogArtifactsInCollection(el, isString);
+        const catalogCallback = (el) => catalogCollection(el, isString);
       
         candidate = "42";
 

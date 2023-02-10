@@ -1,22 +1,22 @@
 import { isArray } from "lodash";
-import { hasArtifacts_, isArtifact_, isArtifactItem } from "./checkers";
+import { hasArtifacts, isArtifact, isArtifactItem } from "./checkers";
 import { areFalse } from "./utils";
 
-export const catalogArtifactItems = (candidate, isArtifactCallback) => {
+export const catalogArtifact = (candidate, isArtifactCallback) => {
   const catalogArtifactItem = (candidate) => isArtifactItem(candidate, isArtifactCallback)
 
-  return hasArtifacts_(candidate, isArtifactCallback)  ? 
+  return hasArtifacts(candidate, isArtifactCallback)  ? 
   (
     isArtifactItem(candidate, isArtifactCallback) ? 
     [ true ] : candidate.map(catalogArtifactItem)
   ) : false;
 }
 
-export const catalogArtifactsInCollection = (candidate, isArtifactCallback) => {
-  const catalogCallback = (element) => catalogArtifactItems(element, isArtifactCallback);
+export const catalogCollection = (candidate, isArtifactCallback) => {
+  const catalogCallback = (element) => catalogArtifact(element, isArtifactCallback);
   
-  return isArtifact_(candidate, isArtifactCallback)  ? 
-    catalogArtifactItems(candidate, isArtifactCallback) : 
+  return isArtifact(candidate, isArtifactCallback)  ? 
+    catalogArtifact(candidate, isArtifactCallback) : 
     ( 
       isArray(candidate) ? 
       (
