@@ -1,5 +1,5 @@
 import { isString } from "lodash";
-import { catalogArtifact, catalogCollection } from "../curators";
+import { catalogArtifact, catalogCollection } from "../curators.js";
 
 let result, expectation, candidate;
 

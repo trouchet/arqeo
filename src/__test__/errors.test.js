@@ -1,5 +1,5 @@
-import { isExtensionOf } from "../utils";
-import { artifactError, artifactErrorMessage, buildError } from "../errors";
+import { isExtensionOf } from "../utils.js";
+import { artifactError, artifactErrorMessage, buildError } from "../errors.js";
 
 let result, expectation;
 

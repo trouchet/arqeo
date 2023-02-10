@@ -1,6 +1,6 @@
 import { isString } from "lodash";
 
-import { applyArtifact } from "../artifacts";
+import { applyArtifact } from "../artifacts.js";
 
 let result, expectation, candidate;
 

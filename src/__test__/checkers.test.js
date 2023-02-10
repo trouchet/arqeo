@@ -7,7 +7,7 @@ import {
   hasArtifacts,
   isArtifactCollection,
   hasArtifactItemInCollection,
-} from "../checkers";
+} from "../checkers.js";
 
 let result, expectation, candidate;
 

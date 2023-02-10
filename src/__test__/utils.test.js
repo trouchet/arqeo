@@ -10,7 +10,7 @@ import {
   isExtensionOf,
   isFalse,
   isTrue,
-} from "../utils";
+} from "../utils.js";
 
 let result, expectation, candidate;
 
