@@ -1,6 +1,6 @@
 {
   "name": "arqeo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A npm package to organize and validate artifacts",
   "main": "dist/index.js",
   "scripts": {
