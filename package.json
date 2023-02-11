@@ -4,7 +4,7 @@
   "type": "module",
   "description": "A npm package to organize and validate artifacts",
   "main": "dist/index-require.js",
-  "module": "src/index.js",
+  "module": "src/index.cjs",
   "modules.root": "src",
   "scripts": {
     "test": "jest",
