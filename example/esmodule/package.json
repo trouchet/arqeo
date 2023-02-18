@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "arqeo": "^0.0.2",
+    "arqeo": "^0.2.0",
     "lodash": "^4.17.21",
     "nodemon": "^2.0.20"
   }

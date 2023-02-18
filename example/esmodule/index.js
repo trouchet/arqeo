@@ -1,7 +1,7 @@
 import aqo from "arqeo";
 import _ from "lodash";
 
-const { is, are, has, catalog, apply } = aqo;
+const { is, are, has, catalog, apply, pick } = aqo;
 
 /**
  *
@@ -60,7 +60,16 @@ report([1, [1, 2, 3]], catalog, "Catalog", _.isString, "as string items");
 report([1, [1, 2, 3]], catalog, "Catalog", _.isNumber, "as number items");
 
 const doubleMap = (num) => 2 * num;
-const applyMap = (candidate, isArtifactCallback) =>
+let applyMap;
+
+applyMap = (candidate, isArtifactCallback) =>
   apply(candidate, isArtifactCallback, doubleMap);
 
 report([1, 2, 3], applyMap, "Apply", _.isNumber, "on number artifact");
+report([1, 2, "3"], pick, "Pick", _.isNumber, "on number artifact");
+
+applyMap = (candidate, isArtifactCallback) => {
+  return apply(pick(candidate, isArtifactCallback), isArtifactCallback, doubleMap)
+};
+
+report([1, 2, "3"], applyMap, "Pick and apply", _.isNumber, "on mixed number-string artifact");
