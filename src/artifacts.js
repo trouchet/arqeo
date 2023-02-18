@@ -1,6 +1,7 @@
 import { fulfill } from "./utils.js";
 import { artifactError } from "./errors.js";
-import { isArtifact, isArtifactArray, isArtifactCollection, isArtifactItem } from "./checkers.js";
+import { isArtifact, isArtifactArray, isArtifactCollection } from "./checkers.js";
+import { pickCollection } from "./curators.js";
 
 const error = artifactError(
   "Provided candidate does not fulfill artifact is-callback",
@@ -35,3 +36,11 @@ export const applyCollection = (candidate, isArtifactCallback, applyCallback) =>
   return isArtifact(collection, isArtifactCallback) ? 
     applyCallback_(collection) : collection.map(applyCallback_);
 };
+
+export const curateCollection = (candidate, isArtifactCallback, applyCallback) => 
+  applyCollection(
+    pickCollection(candidate, isArtifactCallback), isArtifactCallback, applyCallback
+  );
+
+
+

@@ -1,6 +1,6 @@
 import { isNumber, isString } from "lodash";
 
-import { applyArtifact, applyCollection } from "../artifacts.js";
+import { applyArtifact, applyCollection, curateCollection } from "../artifacts.js";
 
 let result, expectation, candidate;
 
@@ -59,7 +59,53 @@ describe("artifacts", () => {
 
     result = applyCallback(candidate);
     expectation = [[2, 4, 6], 8];
+
+    expect(result).toStrictEqual(expectation);
+  });
+
+  it("must apply Collection map", () => {
+    const curateCallback = (el) => curateCollection(el, isNumber, (num) => 2*num);
+
+    candidate = 1;
+
+    result = curateCallback(candidate);
+    expectation = 2;
     
+    expect(result).toStrictEqual(expectation);
+
+    candidate = [1, 2];
+
+    result = curateCallback(candidate);
+    expectation = [2, 4];
+    
+    expect(result).toStrictEqual(expectation);
+
+    candidate = [[1, 2, 3], 4];
+
+    result = curateCallback(candidate);
+    expectation = [[2, 4, 6], 8];
+    
+    expect(result).toStrictEqual(expectation);
+
+    candidate = "42";
+
+    result = curateCallback(candidate);
+    expectation = [];
+
+    expect(result).toStrictEqual(expectation);
+
+    candidate = [1, 2, "3"];
+
+    result = curateCallback(candidate);
+    expectation = [2, 4];
+
+    expect(result).toStrictEqual(expectation);
+
+    candidate = [[1, 2, "3"], "4"];
+
+    result = curateCallback(candidate);
+    expectation = [[2, 4]];
+
     expect(result).toStrictEqual(expectation);
   });
 });
