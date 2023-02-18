@@ -67,5 +67,11 @@ applyMap = (candidate, isArtifactCallback) =>
 
 report([1, 2, 3], applyMap, "Apply", _.isNumber, "on number artifact");
 report([1, 2, "3"], pick, "Pick", _.isNumber, "on number artifact");
-report([1, 2, "3"], curate, "Curate", _.isNumber, "as number artifact");
+
+let curateMap;
+
+curateMap = (candidate, isArtifactCallback) =>
+  curate(candidate, isArtifactCallback, doubleMap);
+
+report([1, 2, "3"], curateMap, "Curate", _.isNumber, "as number artifact");
 
