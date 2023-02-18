@@ -1,12 +1,17 @@
 import { isString } from "lodash";
-import { catalogArtifact, catalogCollection, pickArtifact, pickCollection } from "../curators.js";
+import {
+  catalogArtifact,
+  catalogCollection,
+  pickArtifact,
+  pickCollection,
+} from "../curators.js";
 
 let result, expectation, candidate;
 
 describe("Artifact", () => {
   it("must check for existence of valid items", () => {
     const catalogCallback = (candidate) => catalogArtifact(candidate, isString);
-    
+
     candidate = [1, 2, 3, "4"];
 
     result = catalogCallback(candidate);
@@ -132,10 +137,10 @@ describe("Artifact", () => {
     const pickCallback = (el) => pickCollection(el, isString);
 
     candidate = [42, ["42", 42]];
-    
+
     result = pickCallback(candidate);
     expectation = [["42"]];
-    
+
     expect(result).toStrictEqual(expectation);
 
     candidate = "42";
@@ -163,7 +168,7 @@ describe("Artifact", () => {
 
     result = pickCallback(candidate);
     expectation = ["42"];
-    
+
     expect(result).toStrictEqual(expectation);
 
     candidate = [42, 42];

@@ -172,7 +172,7 @@ describe("artifacts", () => {
 
   it("must check for existence of valid items", () => {
     const hasCallback = (candidate) => hasArtifacts(candidate, isString);
-    
+
     candidate = [1, 2, 3, "4"];
 
     result = hasCallback(candidate);
