@@ -4,7 +4,7 @@ import {
   hasArtifactItemInCollection,
 } from "./checkers.js";
 
-import { catalogCollection } from "./curators.js";
+import { catalogCollection, pickCollection } from "./curators.js";
 
 import { applyArtifact } from "./artifacts.js";
 
@@ -13,3 +13,4 @@ export let are = isArtifactCollection;
 export let has = hasArtifactItemInCollection;
 export let catalog = catalogCollection;
 export let apply = applyArtifact;
+export let pick = pickCollection;

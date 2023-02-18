@@ -1,4 +1,4 @@
-import { isString } from "lodash";
+import { isNumber, isString } from "lodash";
 
 import {
   isArtifactItem,
@@ -44,6 +44,12 @@ describe("artifacts", () => {
   it("must assert artifact collections", () => {
     const collectionCallback = (candidate) =>
       isArtifactCollection(candidate, isString);
+
+    candidate = [[1, 2], 3];
+    result = isArtifactCollection(candidate, isNumber);
+    expectation = true;
+
+    expect(result).toBe(expectation);
 
     candidate = "42";
 
@@ -105,100 +111,99 @@ describe("artifacts", () => {
   });
 
   it("must check for existence of valid items", () => {
-    const hasArtifactItem_ = (el) => hasArtifactItemInCollection(el, isString);
+    const hasItemCallback = (el) => hasArtifactItemInCollection(el, isString);
 
     candidate = 42;
 
-    result = hasArtifactItem_(candidate);
+    result = hasItemCallback(candidate);
     expectation = false;
 
     expect(result).toBe(expectation);
 
     candidate = "42";
 
-    result = hasArtifactItem_(candidate);
+    result = hasItemCallback(candidate);
     expectation = true;
 
     expect(result).toBe(expectation);
 
     candidate = ["7", "42"];
 
-    result = hasArtifactItem_(candidate);
+    result = hasItemCallback(candidate);
     expectation = true;
 
     expect(result).toBe(expectation);
 
     candidate = ["42", 42];
 
-    result = hasArtifactItem_(candidate);
+    result = hasItemCallback(candidate);
     expectation = true;
 
     expect(result).toBe(expectation);
 
     candidate = [42, 42];
 
-    result = hasArtifactItem_(candidate);
+    result = hasItemCallback(candidate);
     expectation = false;
 
     expect(result).toBe(expectation);
 
     candidate = [42, [42, 42]];
 
-    result = hasArtifactItem_(candidate);
+    result = hasItemCallback(candidate);
     expectation = false;
 
     expect(result).toBe(expectation);
 
     candidate = ["42", [42, 42]];
 
-    result = hasArtifactItem_(candidate);
+    result = hasItemCallback(candidate);
     expectation = true;
 
     expect(result).toBe(expectation);
 
     candidate = [42, ["42", 42]];
 
-    result = hasArtifactItem_(candidate);
+    result = hasItemCallback(candidate);
     expectation = true;
 
     expect(result).toBe(expectation);
   });
 
   it("must check for existence of valid items", () => {
+    const hasCallback = (candidate) => hasArtifacts(candidate, isString);
+    
     candidate = [1, 2, 3, "4"];
 
-    result = hasArtifacts(candidate, isString);
+    result = hasCallback(candidate);
+    expectation = true;
+
+    expect(result).toBe(expectation);
+
+    candidate = [1, 2, 3, "4"];
+
+    result = hasCallback(candidate);
     expectation = true;
 
     expect(result).toBe(expectation);
 
     candidate = [1, 2, 3, 4];
 
-    result = hasArtifacts(candidate, isString);
-    let args = [1, 2, 3, "4"];
-
-    result = hasArtifacts(args, isString);
-    expectation = true;
-
-    expect(result).toBe(expectation);
-
-    args = [1, 2, 3, 4];
-
-    result = hasArtifacts(args, isString);
+    result = hasCallback(candidate);
     expectation = false;
 
     expect(result).toBe(expectation);
 
     candidate = "4";
 
-    result = hasArtifacts(candidate, isString);
+    result = hasCallback(candidate);
     expectation = true;
 
     expect(result).toBe(expectation);
 
     candidate = 1;
 
-    result = hasArtifacts(candidate, isString);
+    result = hasCallback(candidate);
     expectation = false;
 
     expect(result).toBe(expectation);
