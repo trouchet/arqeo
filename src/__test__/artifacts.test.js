@@ -1,6 +1,6 @@
-import { isString } from "lodash";
+import { isNumber, isString } from "lodash";
 
-import { applyArtifact } from "../artifacts.js";
+import { applyArtifact, applyCollection } from "../artifacts.js";
 
 let result, expectation, candidate;
 
@@ -9,10 +9,17 @@ describe("artifacts", () => {
     const applyCallback = (el) =>
       applyArtifact(el, isString, (str) => `string: ${str}`);
 
-    candidate = ["1", "2", "3", "4"];
+    candidate = [1];
+  
+    result = () => applyCallback(candidate);
+    expectation = TypeError;
 
+    expect(result).toThrow(expectation);
+
+    candidate = ["1", "2", "3"];
+    
     result = applyCallback(candidate);
-    expectation = ["string: 1", "string: 2", "string: 3", "string: 4"];
+    expectation = ["string: 1", "string: 2", "string: 3"];
 
     expect(result).toStrictEqual(expectation);
 
@@ -21,6 +28,38 @@ describe("artifacts", () => {
     result = applyCallback(candidate);
     expectation = "string: 4";
 
+    expect(result).toStrictEqual(expectation);
+  });
+  
+  it("must apply Collection map", () => {
+    const applyCallback = (el) => applyCollection(el, isNumber, (num) => 2*num);
+
+    candidate = ["1"];
+    
+    result = () => applyCallback(candidate);
+    expectation = TypeError;
+
+    expect(result).toThrow(expectation);
+
+    candidate = 42;
+
+    result = applyCallback(candidate);
+    expectation = 84;
+
+    expect(result).toStrictEqual(expectation);
+
+    candidate = [1, 2, 3];
+
+    result = applyCallback(candidate);
+    expectation = [2, 4, 6];
+
+    expect(result).toStrictEqual(expectation);
+
+    candidate = [[1, 2, 3], 4];
+
+    result = applyCallback(candidate);
+    expectation = [[2, 4, 6], 8];
+    
     expect(result).toStrictEqual(expectation);
   });
 });
