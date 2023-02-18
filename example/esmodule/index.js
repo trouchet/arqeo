@@ -74,4 +74,3 @@ curateMap = (candidate, isArtifactCallback) =>
   curate(candidate, isArtifactCallback, doubleMap);
 
 report([1, 2, "3"], curateMap, "Curate", _.isNumber, "as number artifact");
-

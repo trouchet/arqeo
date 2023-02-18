@@ -1,6 +1,10 @@
 import { fulfill } from "./utils.js";
 import { artifactError } from "./errors.js";
-import { isArtifact, isArtifactArray, isArtifactCollection } from "./checkers.js";
+import {
+  isArtifact,
+  isArtifactArray,
+  isArtifactCollection,
+} from "./checkers.js";
 import { pickCollection } from "./curators.js";
 
 const error = artifactError(
@@ -8,39 +12,51 @@ const error = artifactError(
 );
 
 const artifactApplyCallback = (candidate, isArtifactCallback, applyCallback) =>
-    isArtifactArray(candidate, isArtifactCallback)
-      ? candidate.map(applyCallback)
-      : applyCallback(candidate);
+  isArtifactArray(candidate, isArtifactCallback)
+    ? candidate.map(applyCallback)
+    : applyCallback(candidate);
 
 export const applyArtifact = (candidate, isArtifactCallback, applyCallback) => {
-  const applyCallback_ = (candidate) => 
+  const applyCallback_ = (candidate) =>
     artifactApplyCallback(candidate, isArtifactCallback, applyCallback);
 
   const artifact = fulfill(
-    candidate, isArtifact(candidate, isArtifactCallback), 
-    error.message, error.type,
-  )
+    candidate,
+    isArtifact(candidate, isArtifactCallback),
+    error.message,
+    error.type,
+  );
 
   return applyCallback_(artifact);
 };
 
-export const applyCollection = (candidate, isArtifactCallback, applyCallback) => {
-  const applyCallback_ = (candidate) => 
+export const applyCollection = (
+  candidate,
+  isArtifactCallback,
+  applyCallback,
+) => {
+  const applyCallback_ = (candidate) =>
     artifactApplyCallback(candidate, isArtifactCallback, applyCallback);
-  
+
   const collection = fulfill(
-    candidate, isArtifactCollection(candidate, isArtifactCallback),
-    error.message, error.type,
+    candidate,
+    isArtifactCollection(candidate, isArtifactCallback),
+    error.message,
+    error.type,
   );
-  
-  return isArtifact(collection, isArtifactCallback) ? 
-    applyCallback_(collection) : collection.map(applyCallback_);
+
+  return isArtifact(collection, isArtifactCallback)
+    ? applyCallback_(collection)
+    : collection.map(applyCallback_);
 };
 
-export const curateCollection = (candidate, isArtifactCallback, applyCallback) => 
+export const curateCollection = (
+  candidate,
+  isArtifactCallback,
+  applyCallback,
+) =>
   applyCollection(
-    pickCollection(candidate, isArtifactCallback), isArtifactCallback, applyCallback
+    pickCollection(candidate, isArtifactCallback),
+    isArtifactCallback,
+    applyCallback,
   );
-
-
-
