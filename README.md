@@ -18,19 +18,18 @@ The callback-concepts are:
 1. __isArtifactCallback__: 1-input/boolean-output function for respective artifact item or array; 
 2. __applyCallback__: 1-input/any-output function to apply on respective artifact item or array; 
 
-The checker-concepts are:
+The main available functionalities are:
 
-1. __is__: validates `candidate` with `isArtifactCallback`-function to verify it is an artifact; 
-2. __are__: verifies if `candidate` with `isArtifactCallback`-function to verify it is a collection;
-3. __has__: verifies if `candidate` has valid artifact items;
+- Checkers:
 
-The catalog-concepts are:
+  1. __is__: validates `candidate` with `isArtifactCallback`-function to verify it is an artifact; 
+  2. __are__: verifies if `candidate` with `isArtifactCallback`-function to verify it is a collection;
+  3. __has__: verifies if `candidate` has valid artifact items;
 
-1. __catalog__: applies `isArtifactCallback` on potential {artifact, collection}-elements to validate each item individually.  
+- __catalog__: applies `isArtifactCallback` boolean callback on potential {artifact, collection}-elements to validate each item individually.  
+- __apply__: applies `applyCallback`-function on artifact-candidate with validation of `isArtifactCallback` boolean callback.
+- __pick__: pick valid artifact items according to `isArtifactCallback` boolean callback.
 
-The transform-concepts are:
-
-1. __apply__: applies `applyCallback`-function on artifact-candidate with validation of `isArtifactCallback`-function.
 
 ## Use cases
 
