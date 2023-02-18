@@ -1,7 +1,7 @@
 const aqo = require("arqeo");
 const _ = require("lodash");
 
-const { is, are, has, catalog, apply, pick } = aqo;
+const { is, are, has, catalog, apply, pick, curate } = aqo;
 
 /**
  *
@@ -67,9 +67,4 @@ applyMap = (candidate, isArtifactCallback) =>
 
 report([1, 2, 3], applyMap, "Apply", _.isNumber, "on number artifact");
 report([1, 2, "3"], pick, "Pick", _.isNumber, "on number artifact");
-
-applyMap = (candidate, isArtifactCallback) => {
-  return apply(pick(candidate, isArtifactCallback), isArtifactCallback, doubleMap)
-};
-
-report([1, 2, "3"], applyMap, "Pick and apply", _.isNumber, "on mixed number-string artifact");
+report([1, 2, "3"], curate, "Curate", _.isNumber, "as number artifact");
