@@ -31,6 +31,9 @@ const requireConfig = Object.assign({}, config, {
     filename: "index-require.cjs",
     libraryTarget: "commonjs2",
   },
+  optimization: {
+    minimize: false,
+  },  
 });
 
 module.exports = requireConfig;
