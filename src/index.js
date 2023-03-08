@@ -6,12 +6,12 @@ import {
 
 import { catalogCollection, pickCollection } from "./curators.js";
 
-import { applyArtifact, curateCollection } from "./artifacts.js";
+import { applyCollection, curateCollection } from "./artifacts.js";
 
 export let is = isArtifact;
 export let are = isArtifactCollection;
 export let has = hasArtifactItemInCollection;
 export let catalog = catalogCollection;
-export let apply = applyArtifact;
+export let apply = applyCollection;
 export let pick = pickCollection;
 export let curate = curateCollection;

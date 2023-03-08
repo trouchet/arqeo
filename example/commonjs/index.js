@@ -47,17 +47,23 @@ const report = (
   print(quest.question, quest.answer);
 };
 
-report([1, 2, 3], is, "Is", _.isNumber, "a number artifact");
-report([1, 2, "3"], is, "Is", _.isNumber, "a number artifact");
+const validNumberArtifact = [1, 2, 3];
+const invalidNumberArtifact = [1, 2, "3"];
 
-report([1, [1, 2, 3]], are, "Are", _.isNumber, "a number collection");
-report([1, [1, 2, "3"]], are, "Are", _.isNumber, "a number collection");
+const validNumberCollection = [1, [1, 2, 3]];
+const invalidNumberCollection = [1, [1, 2, "3"]];
 
-report([1, [1, 2, 3]], has, "Has", _.isString, "a string item");
-report([1, [1, 2, "3"]], has, "Has", _.isString, "a string item");
+report(validNumberArtifact, is, "Is", _.isNumber, "a number artifact");
+report(invalidNumberArtifact, is, "Is", _.isNumber, "a number artifact");
 
-report([1, [1, 2, 3]], catalog, "Catalog", _.isString, "as string items");
-report([1, [1, 2, 3]], catalog, "Catalog", _.isNumber, "as number items");
+report(validNumberCollection, are, "Are", _.isNumber, "a number collection");
+report(invalidNumberCollection, are, "Are", _.isNumber, "a number collection");
+
+report(validNumberCollection, has, "Has", _.isString, "a string item");
+report(invalidNumberCollection, has, "Has", _.isString, "a string item");
+
+report(validNumberCollection, catalog, "Catalog", _.isString, "as string items");
+report(validNumberCollection, catalog, "Catalog", _.isNumber, "as number items");
 
 const doubleMap = (num) => 2 * num;
 let applyMap;
@@ -65,12 +71,21 @@ let applyMap;
 applyMap = (candidate, isArtifactCallback) =>
   apply(candidate, isArtifactCallback, doubleMap);
 
-report([1, 2, 3], applyMap, "Apply", _.isNumber, "on number artifact");
-report([1, 2, "3"], pick, "Pick", _.isNumber, "on number artifact");
+report(validNumberArtifact, applyMap, "Apply", _.isNumber, "on number artifact");
+report(validNumberCollection, applyMap, "Apply", _.isNumber, "on number collection");
+
+report(invalidNumberArtifact, pick, "Pick", _.isNumber, "on number artifact");
 
 let curateMap;
 
 curateMap = (candidate, isArtifactCallback) =>
   curate(candidate, isArtifactCallback, doubleMap);
 
-report([1, 2, "3"], curateMap, "Curate", _.isNumber, "as number artifact");
+report(invalidNumberArtifact, curateMap, "Curate", _.isNumber, "as number artifact");
+
+try {
+  report(invalidNumberArtifact, applyMap, "Apply", _.isNumber, "on number artifact");
+} catch(e) {
+  console.log(`You tried to apply function ${doubleMap} on artifact ${JSON.stringify(invalidNumberArtifact)}. It threw the error below:`);
+  console.log(e);
+}
