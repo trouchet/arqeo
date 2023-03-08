@@ -39,7 +39,7 @@ describe("artifacts", () => {
     const applyCallback = (el) =>
       applyCollection(el, isNumber, (num) => 2 * num);
 
-    candidate = ["1"];
+    candidate = ["1", 2];
 
     result = () => applyCallback(candidate);
     expectation = TypeError;
@@ -108,7 +108,7 @@ describe("artifacts", () => {
     expect(result).toStrictEqual(expectation);
 
     candidate = [[1, 2, "3"], "4"];
-
+    
     result = curateCallback(candidate);
     expectation = [[2, 4]];
 

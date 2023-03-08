@@ -27,8 +27,8 @@ export const artifactErrorMessage = (candidate, isCallback, ItemCriteria = DEFAU
   const artifactCriterium = "either an item or array of items with true-return callback";
   const descriptionPreamble = `An artifact is ${artifactCriterium}. `;
 
-  const statement = `Candidate catalog is ${JSON.stringify(catalogedCollection)}`;
-  const legend = "\'false\' stands for non-fulfilling artifact is-callback";
+  const statement = `Candidate catalog output is ${JSON.stringify(catalogedCollection)}`;
+  const legend = "\'false\' stands for non-fulfilling artifacts is-callback";
   const catalogDescription = `${statement}, where ${legend}`
 
   const description = descriptionPreamble + catalogDescription + "\n";
