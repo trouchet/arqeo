@@ -1,5 +1,6 @@
 import { isExtensionOf } from "../utils.js";
 import { artifactError, artifactErrorMessage, buildError } from "../errors.js";
+import { isNumber } from "lodash";
 
 let result, expectation;
 
@@ -23,7 +24,7 @@ describe("error", () => {
 
 describe("errorMessage", () => {
   it("must match artifact message snippet", () => {
-    result = artifactErrorMessage();
+    result = artifactErrorMessage([1, '2'], isNumber);
     expectation = "An artifact is ";
 
     expect(result).toMatch(expectation);
@@ -31,7 +32,7 @@ describe("errorMessage", () => {
   it("must match criteria snippet", () => {
     const criteria = "These are item criteria.";
 
-    result = artifactErrorMessage(criteria);
+    result = artifactErrorMessage([1, '2'], isNumber, criteria);
     expectation = criteria;
 
     expect(result).toMatch(expectation);
@@ -41,7 +42,7 @@ describe("errorMessage", () => {
 describe("error", () => {
   it("must assert artifact error properties", () => {
     const message = "These are criteria!";
-    const error = artifactError(message);
+    const error = artifactError([1, '2'], isNumber, message);
 
     result = error.message;
     expectation = message;
@@ -59,7 +60,7 @@ describe("error", () => {
     expect(result).toBe(expectation);
   });
   it("must assert artifact with missing message", () => {
-    const error = artifactError();
+    const error = artifactError([1, '2'], isNumber, );
 
     result = error.message;
     expectation = "artifact";

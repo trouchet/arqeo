@@ -8,10 +8,9 @@ export const isArtifactArray = (candidate, isArtifactCallback) =>
 export const isArtifactItem = (candidate, isArtifactCallback) =>
   isArtifactCallback(candidate);
 
-export const isArtifact = (candidate, isArtifactCallback) =>
-  isArtifactCallback(candidate)
-    ? true
-    : isArtifactArray(candidate, isArtifactCallback);
+export const isArtifact = (candidate, isArtifactCallback) => {
+  return isArtifactCallback(candidate) ? true : isArtifactArray(candidate, isArtifactCallback);
+};
 
 export const hasArtifactItem = (candidate, isArtifactCallback) =>
   isArray(candidate) ? candidate.map(isArtifactCallback).includes(true) : false;
